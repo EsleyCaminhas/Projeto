@@ -1,0 +1,193 @@
+---
+pdf_document:
+  extra_dependencies: [amsmath, tikz]
+author: "Esley Caminhas Ferreira"
+date: "27/05/2023"
+output:
+  html_document: default
+  pdf_document: default
+title: "Caminhada Aleatória"
+---
+<style type="text/css">
+  body{
+  font-family: Sans-serif;
+  font-size: 13pt;
+}
+</style>
+
+
+
+# **Experimento Caminhada Aleatória**
+
+```{r, echo=FALSE, fig.align='center', fig.cap = ''}
+knitr::include_graphics("C:/Users/esley/Desktop/text/drunker.jpg")
+```
+
+
+## **Objetivo**
+
+Introduzir os visitantes da mostra a ideia de caminhada aleatória e estimular o pensamento probabilístico dos mesmos.
+
+## **Motivação**
+
+Um marcador é posto na origem de uma malha quadriculada, seu movimento funciona da seguinte maneira, uma moeda honesta é lançada: 
+
+* Se cair cara, o marcador avança diagonalmente uma unidade para a direita.
+* Se cair coroa, o marcador avança diagonalmente uma unidade para a esquerda.
+
+Com isso surge a seguinte pergunta: É possível prever qual será a posição final do marcador na malha?
+
+## **Construção**
+
+Para esse experimento são necessários:
+
+* Uma malha quadriculada, para ser mais intuitiva a malha usada pode ser composta somente dos caminhos possíveis.
+* Um marcador, qualquer item que possa ser usado para marcar a posição atual durante o experimento.
+Ex. Moeda, bala, peça de xadrez, etc.
+
+* Uma moeda honesta.
+
+
+## **Execução**
+
+1. É perguntado aos visitantes em que casa da última linha da malha eles acreditam que o marcado irá terminar.
+
+2. Em seguida o marcador é posicionado na origem da malha e a moeda é jogada.
+
+3. Dependendo do resultado o marcado será movido para uma das próximas casas.
+
+4. Assim sucessivamente até o marcador chegar a última linha.
+
+5. Ao final é explicada a ideia por traz do experimento e o porque da moeda acabar mais nas casas do centro do que nas das bordas.
+
+
+
+## **Teoria**
+
+### Caminhada aleatória no plano 
+
+Prever a posição final de forma consistente é impossível pois o marcador se move de maneira incerta, nesse momento usamos a probabilidade como ferramenta para nos ajudar a quantificar essa incerteza.
+
+Seja $X$ uma variável aleatória que assume valores 1 e -1 com mesma probabilidade. Tendo a seguinte função massa de probabilidade.
+
+$$f(x) = \begin{cases} 
+\frac{1}{2},
+\ \ 
+x \ = 
+\ \ \ 
+1 
+\\ 
+\frac{1}{2},
+\ \ 
+x \ = -1 
+\end{cases}$$
+
+Com valor esperado.
+
+$$E[X] = \sum_{x \in Rx} x \ f(x) = -\frac{1}{2} + \frac{1}{2} = 0 $$
+
+Usando $X$ podemos descrever o movimento do marcador na malha, ou nesse caso no plano cartesiano, da seguinte maneira:
+
+$$(0,0) 
+\rightarrow 
+(1, \ X_1) 
+\rightarrow 
+(2, \ X_1+X_2) 
+\rightarrow 
+(3, \ X_1+X_2+X_3) 
+\rightarrow 
+... \rightarrow 
+(n, \ X_1+X_2+X_3+...+X_n)$$
+
+Portanto $(n, \ X_1+X_2+X_3+...+X_n)$ representa posição final do marcador depois de $n$ passos, logo para encontrarmos o valor esperado dessa última posição devemos encontrar: 
+
+$$E[X_1+X_2+X_3+...+X_n] = E[X_1]+E[X_2]+E[X_3]+...+E[X_n]$$
+E como cada $X_i$, $1 \leq i \leq n$, segue a mesma distribuição $X$.
+
+$$E[X_1]+E[X_2]+E[X_3]+...+E[X_n] = nE[X] = 0$$
+Logo o valor esperado para a última posição do marcador depois de $n$ lançamentos é $(n,0)$. Esse resultado nos mostra que o marcador tem maior probabilidade de acabar em casas próximas ao centro.
+
+Utilizando dessa ideia podemos simular as caminhadas.
+
+```{r echo=FALSE, warning=FALSE, fig.align='center'}
+
+#install.packages("randomcoloR")
+library(randomcoloR)
+FinalPos = c()
+plot(-20:20
+     ,type="n"
+     , asp = 1
+     , xlab = "Passos"
+     , ylab = "Posição"
+     ,xlim = c(0,210)
+     ,main = "Simulação de 200 caminhadas aleatorias \n cada uma com 200 passos")
+
+for (i in 1:200){
+  
+  Direção = c(1, -1)
+  Posição = c(0)
+  Rota = c(0)
+  
+  for (i in 1:200){
+    
+    Passo = sample(Direção, 1)
+    
+    Posição = Posição + Passo
+    
+    Rota = c(Rota, Posição)
+    
+  }
+  par(new=T)
+  
+  lines(Rota
+        , type="l"
+        , asp = 1
+        , xlab = ""
+        , ylab = ""
+        , col=distinctColorPalette(sample(1:40,1))
+        ,lwd= 2)
+    FinalPos = c(FinalPos, Posição)
+}
+
+```
+
+
+```{r echo=FALSE, warning=FALSE, fig.align='center'}
+hist(FinalPos
+     , main = "Última posição nas 200 caminhadas simuladas"
+     , xlab = "Posição"
+     , ylab = "Frequência")
+```
+
+
+### **Relação com o tringulo de pascal e a distribuição binomial**
+
+```{r, echo=FALSE, fig.align='center', fig.cap = 'Triangulo de Pascal (até a oitava linha).'}
+knitr::include_graphics("C:/Users/esley/Desktop/text/pascal.png")
+```
+
+Ao calcularmos a probabilidade do marcador visitar determinada casa da malha podemos identificar um padrão, considerando a origem com probabilidade 1 o resto das casas da primeira linha com probabilidade 0, a probabilidade de dada casa ser visitada pelo marcador é a soma das probabilidades das casas anteriores adjacentes a ela multiplicadas por $\frac{1}{2}$.
+
+```{r, echo=FALSE, fig.align='center', fig.cap = 'Probabilidade de visita de cada casa (até a quinta linha).'}
+knitr::include_graphics("C:/Users/esley/Desktop/text/test.png")
+```
+
+Usando da semelhança dessa sequência com o triangulo de pascal podemos utilizar o coeficiente binomial para encontrar a probabilidade de cada casa ser visitada, denotando por $F_{u,v}$ o evento "moeda visitar a u-ésima casa da v-ésima linha", temos:
+
+\begin{equation}
+
+P(F_{u,v})={v \choose u}\frac{1}{2^v}={v \choose u} \left( \frac{1}{2} \right)^v
+
+\end{equation}
+
+Com ${v \choose u} = \frac{v!}{u!(v-u)!}$.
+
+Com as posições de linha e coluna sendo contadas a partir de zero e $0 \leq u \leq v$, nessa equação podemos perceber que quanto mais próxima das bordas, dos valores extremos, menor é a probabilidade da casa ser visitada.
+
+O último termo dessa igualdade pode ser escrito como sendo a probabilidade da variável aleatória $X$ ser igual a $u$ quando $X$ tem distribuição binomial com os parametros $n=v$ e $p=\frac{1}{2}$.
+
+
+
+
+
+  
