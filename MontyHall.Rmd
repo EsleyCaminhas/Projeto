@@ -1,0 +1,166 @@
+---
+pdf_document:
+  extra_dependencies: [amsmath,tikz]
+title: "Monty Hall"
+author: "Esley Caminhas Ferreira"
+date: "06/06/2023"
+output: html_document
+---
+<style type="text/css">
+  body{
+  font-family: Sans-serif;
+  font-size: 13pt;
+}
+</style>
+
+
+# **Experimento Monty Hall**
+
+Monty hall era o nome artistico do apresentador Monte Halperin mais conhecido por ter apresentado o programa de televisao estadunidense Lets make a deal.
+<br/><br/>
+
+```{r, echo=FALSE, fig.align='center', fig.cap = 'Monty Hall e uma participante no programa Lets make a deal', out.width="65%"}
+knitr::include_graphics("C:/Users/esley/Desktop/text/doors.jpg")
+```
+
+## Objetivo
+
+Introduzir os visitantes da mostra ao problema de Monty Hall e estimular o pensamento probabilistico dos mesmos.
+
+
+## Motivacao
+
+Suponha que voce esteja em um programa de televisao e tenha a opcao de escolher dentre três portas: Atrás de uma porta está um carro e atrás das outras duas cabras.
+
+<br/>
+
+```{tikz, tikz-ex, fig.align='center', fig.cap = "", fig.ext = 'png', cache=TRUE, echo=FALSE}
+\begin{tikzpicture}
+
+\filldraw[color=red, draw=black, line width = 0.7] (0,0) -- (1,0) -- (1,2) -- (0,2) -- (0,0);
+
+\filldraw[color=black] (0.5,1.3) circle (9pt);
+\filldraw[color=white] (0.5,1.3) circle (8.3pt);
+
+\node at (0.5,1.3) {$1\textsuperscript{\underline{o}}$};
+
+\node [line width = 1, color = black] at (0.5,0.6) {\bf ?};
+
+
+\filldraw[color=green, draw=black, line width = 0.7] (3,0) -- (4,0) -- (4,2) -- (3,2) -- (3,0);
+
+\filldraw[color=black] (3.5,1.3) circle (9pt);
+\filldraw[color=white] (3.5,1.3) circle (8.3pt);
+
+\node at (3.5,1.3) {$2\textsuperscript{\underline{o}}$};
+
+\node [line width = 1, color = black] at (3.5,0.6) {\bf ?};
+
+
+\filldraw[color=yellow, draw=black, line width = 0.7] (6,0) -- (7,0) -- (7,2) -- (6,2) -- (6,0);
+
+\filldraw[color=black] (6.5,1.3) circle (9pt);
+\filldraw[color=white] (6.5,1.3) circle (8.3pt);
+
+\node at (6.5,1.3) {$3\textsuperscript{\underline{o}}$};
+
+\node [line width = 1, color = black] at (6.5,0.6) {\bf ?};
+
+\end{tikzpicture}
+```
+
+<br/>
+
+Você escolhe uma porta, suponha a segunda.
+
+<br/>
+
+```{tikz, tikz-ex3, fig.align='center', fig.cap = "", fig.ext = 'png', cache=TRUE, echo=FALSE}
+\begin{tikzpicture}
+
+\filldraw[color=red, draw=black, line width = 0.7] (0,0) -- (1,0) -- (1,2) -- (0,2) -- (0,0);
+
+\filldraw[color=black] (0.5,1.3) circle (9pt);
+\filldraw[color=white] (0.5,1.3) circle (8.3pt);
+
+\node at (0.5,1.3) {$1\textsuperscript{\underline{o}}$};
+
+
+\filldraw[color=green, draw=blue, line width = 0.9] (3,0) -- (4,0) -- (4,2) -- (3,2) -- (3,0);
+
+\filldraw[color=black] (3.5,1.3) circle (9pt);
+\filldraw[color=white] (3.5,1.3) circle (8.3pt);
+
+\node at (3.5,1.3) {$2\textsuperscript{\underline{o}}$};
+
+
+\filldraw[color=yellow, draw=black, line width = 0.7] (6,0) -- (7,0) -- (7,2) -- (6,2) -- (6,0);
+
+\filldraw[color=black] (6.5,1.3) circle (9pt);
+\filldraw[color=white] (6.5,1.3) circle (8.3pt);
+
+\node at (6.5,1.3) {$3\textsuperscript{\underline{o}}$};
+
+\end{tikzpicture}
+```
+
+<br/>
+
+O apresentador, que sabe onde está o carro, então abre outra porta, suponha a terceira, que tem uma cabra. Ele então pergunta a você: "Você quer trocar para porta um, ou continuar com a porta dois?".
+
+<br/>
+
+```{tikz, tikz-ex2, fig.align='center', fig.cap = "", fig.ext = 'png', cache=TRUE, echo=FALSE}
+\begin{tikzpicture}
+
+\filldraw[color=red, draw=black, line width = 0.7] (0,0) -- (1,0) -- (1,2) -- (0,2) -- (0,0);
+
+\filldraw[color=black] (0.5,1.3) circle (9pt);
+\filldraw[color=white] (0.5,1.3) circle (8.3pt);
+
+\node at (0.5,1.3) {$1\textsuperscript{\underline{o}}$};
+
+\node [line width = 1, color = black] at (0.5,0.6) {\bf ?};
+
+
+\filldraw[color=green, draw=black, line width = 0.7] (3,0) -- (4,0) -- (4,2) -- (3,2) -- (3,0);
+
+\filldraw[color=black] (3.5,1.3) circle (9pt);
+\filldraw[color=white] (3.5,1.3) circle (8.3pt);
+
+\node at (3.5,1.3) {$2\textsuperscript{\underline{o}}$};
+
+\node [line width = 1, color = black] at (3.5,0.6) {\bf ?};
+
+
+\filldraw[color=yellow, draw=black, line width = 0.7] (6,0) -- (7,0) -- (7,2) -- (6,2) -- (6,0);
+
+\filldraw[color=black] (6.5,1.3) circle (9pt);
+\filldraw[color=white] (6.5,1.3) circle (8.3pt);
+
+\node at (6.5,1.3) {$3\textsuperscript{\underline{o}}$};
+
+\draw[draw=red, line width = 3] (6.2,1) -- (6.8,1.6);
+\draw[draw=red, line width = 3] (6.8,1) -- (6.2,1.6);
+
+\end{tikzpicture}
+```
+
+
+<br/>
+
+A questão e a seguinte considerando que o principal objetivo e acertar em qual porta esta o carro, qual estrategia e a melhor, continuar com sua escolha inicial ou trocar de porta?
+
+## construcao
+
+## execucao
+
+## teoria
+
+
+
+
+
+
+
+
