@@ -2,200 +2,324 @@
 pdf_document:
   extra_dependencies: [amsmath,tikz]
 title: "Monty Hall"
+
 author: "Esley Caminhas Ferreira"
 date: "06/06/2023"
-output: html_document
+output:
+   html_document:
+    number_sections: true
 ---
 <style type="text/css">
   body{
-  font-family: Sans-serif;
-  font-size: 13pt;
+  font-family: Arial;
+  font-size: 15pt;
 }
 </style>
 
 
-# **Experimento Monty Hall**
+# Experimento Monty Hall
 
-Monty hall era o nome artistico do apresentador Monte Halperin mais conhecido por ter apresentado o programa de televisao estadunidense Lets make a deal.
-<br/><br/>
+***
 
-```{r, echo=FALSE, fig.align='center', fig.cap = 'Monty Hall e uma participante no programa Lets make a deal', out.width="65%"}
+Monty Hall, nome artístico de Monte Halperin, ficou mais conhecido por apresentar o programa de televisão estadunidense *Let's Make a Deal*, o programa tinha um formato parecido com o *Programa do Silvio Santos* onde os participantes competiam em diferentes brincadeiras com o apresentador com o bjetivo de ganhar premios.
+<br/>
+
+***
+
+```{r, echo=FALSE, fig.align='center', fig.cap = 'Monty Hall e uma participante no programa Let\'s make a deal', out.width="55%"}
 knitr::include_graphics("C:/Users/esley/Desktop/text/doors.jpg")
 ```
 
+***
+
+O problema foi primeiramente proposto e solucionado por Steve Selvin em 1975, contudo ganhou maior repercursao em 1990 apos a colunista Marilyn vos Savant responder a um leitor que a questionou sobre o problema, essa resposta criou grande controversia na epoca, desde então o problema de monty hall tem sido um quebra-cabeça comum para introduzir as pessoas ao comportamento não intuitivo da probabilidade.
+
 ## Objetivo
 
-Introduzir os visitantes da mostra ao problema de Monty Hall e estimular o pensamento probabilistico dos mesmos.
+Introduzir os visitantes da mostra ao problema de *Monty Hall* e estimular o pensamento probabilistico dos mesmos.
 
 
-## Motivacao
+## Motivação
 
-Suponha que voce esteja em um programa de televisao e tenha a opcao de escolher dentre três portas: Atrás de uma porta está um carro e atrás das outras duas cabras.
-
-<br/>
-
-```{tikz, tikz-ex, fig.align='center', fig.cap = "", fig.ext = 'png', cache=TRUE, echo=FALSE}
-\begin{tikzpicture}
-
-\filldraw[color=red!85, draw=black, line width = 0.7] (0,0) -- (1,0) -- (1,2) -- (0,2) -- (0,0);
-
-\filldraw[color=black] (0.5,1.3) circle (9pt);
-\filldraw[color=white] (0.5,1.3) circle (8.3pt);
-
-\node at (0.5,1.3) {$1\textsuperscript{\underline{o}}$};
-
-\node [line width = 1, color = black] at (0.5,0.6) {\bf ?};
-
-
-\filldraw[color=green!85, draw=black, line width = 0.7] (3,0) -- (4,0) -- (4,2) -- (3,2) -- (3,0);
-
-\filldraw[color=black] (3.5,1.3) circle (9pt);
-\filldraw[color=white] (3.5,1.3) circle (8.3pt);
-
-\node at (3.5,1.3) {$2\textsuperscript{\underline{o}}$};
-
-\node [line width = 1, color = black] at (3.5,0.6) {\bf ?};
-
-
-\filldraw[color=yellow!85, draw=black, line width = 0.7] (6,0) -- (7,0) -- (7,2) -- (6,2) -- (6,0);
-
-\filldraw[color=black] (6.5,1.3) circle (9pt);
-\filldraw[color=white] (6.5,1.3) circle (8.3pt);
-
-\node at (6.5,1.3) {$3\textsuperscript{\underline{o}}$};
-
-\node [line width = 1, color = black] at (6.5,0.6) {\bf ?};
-
-\end{tikzpicture}
-```
-
-<br/>
+Imagine que você esteja em um programa de televisão e tenha a opção de escolher dentre três portas: 
+Atrás de uma porta está um carro e atrás das outras cabras.
 
 Você escolhe uma porta, suponha a segunda.
 
-<br/>
+O apresentador, que sabe onde está o carro, então abre outra porta, suponha a terceira, que tem uma cabra. Ele então pergunta: 
+"Você quer continuar com sua primeira escolha, ou trocar de porta?".
 
-```{tikz, tikz-ex3, fig.align='center', fig.cap = "", fig.ext = 'png', cache=TRUE, echo=FALSE}
-\begin{tikzpicture}
+A dúvida é a seguinte, assumindo que o principal objetivo é acertar em qual porta está o carro, qual estratégia é a melhor, continuar com sua escolha inicial ou trocar de porta?
 
-\filldraw[color=red!85, draw=black, line width = 0.7] (0,0) -- (1,0) -- (1,2) -- (0,2) -- (0,0);
+## Construção
 
-\filldraw[color=black] (0.5,1.3) circle (9pt);
-\filldraw[color=white] (0.5,1.3) circle (8.3pt);
+[Texto explicando a construção do experimento]
 
-\node at (0.5,1.3) {$1\textsuperscript{\underline{o}}$};
+## Execução
 
+[Texto explicando a execução do experimento]
 
-\filldraw[color=green!85, draw=blue!85, line width = 0.9] (3,0) -- (4,0) -- (4,2) -- (3,2) -- (3,0);
+## Teoria
 
-\filldraw[color=black] (3.5,1.3) circle (9pt);
-\filldraw[color=white] (3.5,1.3) circle (8.3pt);
+### Solução via *Princípio fundamental da contagem*
 
-\node at (3.5,1.3) {$2\textsuperscript{\underline{o}}$};
+Utilizando o *pricípio fundamental da contagem* podemos construir um conjunto com todos os possiveis resultados do experimento e encontrar suas respectivas probabilidades.
 
-
-\filldraw[color=yellow!85, draw=black, line width = 0.7] (6,0) -- (7,0) -- (7,2) -- (6,2) -- (6,0);
-
-\filldraw[color=black] (6.5,1.3) circle (9pt);
-\filldraw[color=white] (6.5,1.3) circle (8.3pt);
-
-\node at (6.5,1.3) {$3\textsuperscript{\underline{o}}$};
-
-\end{tikzpicture}
-```
-
-<br/>
-
-O apresentador, que sabe onde está o carro, então abre outra porta, suponha a terceira, que tem uma cabra. Ele então pergunta a você: "Você quer trocar para porta um, ou continuar com a porta dois?".
-
-<br/>
-
-```{tikz, tikz-ex2, fig.align='center', fig.cap = "", fig.ext = 'png', cache=TRUE, echo=FALSE}
-\begin{tikzpicture}
-
-\filldraw[color=red!85, draw=black, line width = 0.7] (0,0) -- (1,0) -- (1,2) -- (0,2) -- (0,0);
-
-\filldraw[color=black] (0.5,1.3) circle (9pt);
-\filldraw[color=white] (0.5,1.3) circle (8.3pt);
-
-\node at (0.5,1.3) {$1\textsuperscript{\underline{o}}$};
-
-\node [line width = 1, color = black] at (0.5,0.6) {\bf ?};
+Denotando por $p_i$ o evento "porta $i$ ser a premiada" e por $P$ a probabilidade desse evento, temos:
 
 
-\filldraw[color=green!85, draw=black, line width = 0.7] (3,0) -- (4,0) -- (4,2) -- (3,2) -- (3,0);
-
-\filldraw[color=black] (3.5,1.3) circle (9pt);
-\filldraw[color=white] (3.5,1.3) circle (8.3pt);
-
-\node at (3.5,1.3) {$2\textsuperscript{\underline{o}}$};
-
-\node [line width = 1, color = black] at (3.5,0.6) {\bf ?};
-
-
-\filldraw[color=yellow!85, draw=black, line width = 0.7] (6,0) -- (7,0) -- (7,2) -- (6,2) -- (6,0);
-
-\filldraw[color=black] (6.5,1.3) circle (9pt);
-\filldraw[color=white] (6.5,1.3) circle (8.3pt);
-
-\node at (6.5,1.3) {$3\textsuperscript{\underline{o}}$};
-
-\draw[draw=red!85, line width = 3] (6.2,1) -- (6.8,1.6);
-\draw[draw=red!85, line width = 3] (6.8,1) -- (6.2,1.6);
-
-\end{tikzpicture}
-```
+\begin{matrix}
+p_i & P
+\\
+1 & 1/3
+\\
+2 & 1/3
+\\
+3 & 1/3
+\end{matrix}
 
 
-<br/>
+Agora considerando $p_j$ como sendo o evento "porta $j$ escolhida pelo participante", dado que cada porta é escolhida com probabilidade $\frac{1}{3}$.
 
-A questão e a seguinte considerando que o principal objetivo e acertar em qual porta esta o carro, qual estrategia e a melhor, continuar com sua escolha inicial ou trocar de porta?
+\begin{matrix}
+p_i & p_j & P
+\\
+1 & 1 & 1/9
+\\
+1 & 2 & 1/9
+\\
+1 & 3 & 1/9
+\\
+2 & 1 & 1/9
+\\
+2 & 2 & 1/9
+\\
+2 & 3 & 1/9
+\\
+3 & 1 & 1/9
+\\
+3 & 2 & 1/9
+\\
+3 & 3 & 1/9
+\end{matrix}
 
-## construcao
+Por fim usando $p_k$ denotaremos o evento "porta $k$ aberta pelo apresentador", lembrando que quando $p_i = p_j$ o apresentador pode escolher abrir, com mesma probabilidade $\frac{1}{2}$, qualquer uma das duas portas restantes pois ambas são não premiadas, porém quando $p_i \neq p_j$ o apresentador tem apenas uma opção, pois ele nunca abre a porta que contêm o premio, logo ele escolhe abrir com probabilidade $1$ a porta não premiada.
 
-## execucao
+\begin{matrix}
 
-## teoria
+p_i & p_j & p_k & P
+\\
+1 & 1 & 2 & 1/18
+\\
+1 & 1 & 3 & 1/18
+\\
+1 & 2 & 3 & 1/9
+\\
+1 & 3 & 2 & 1/9
+
+\\
+
+2 & 1 & 3 & 1/9
+\\
+2 & 2 & 1 & 1/18
+\\
+2 & 2 & 3 & 1/18
+\\
+2 & 3 & 1 & 1/9
+
+\\  
+
+3 & 1 & 2 & 1/9
+\\
+3 & 2 & 1 & 1/9
+\\
+3 & 3 & 2 & 1/18
+\\
+3 & 3 & 1 & 1/18
+
+\end{matrix}
+
+Esse é o conjunto de todos os resultados possiveis do experimento, o *espaco amostral* do experimento.
+
+Portanto para obtermos a probabilidade do evento "continuar com a primeira escolha resulta em sucesso", que denotaremos por $CS$, basta somarmos as probabilidades dos eventos tais que $p_1 = p_2$.
+
+\begin{matrix}
+p_i & p_j & p_k & P
+\\
+1 & 1 & 2 & 1/18
+\\
+1 & 1 & 3 & 1/18
+\\
+2 & 2 & 1 & 1/18
+\\
+2 & 2 & 3 & 1/18
+\\
+3 & 3 & 2 & 1/18
+\\
+3 & 3 & 1 & 1/18
+\end{matrix}
+
+$$P(CS) = \frac{1}{18} \times 6 = \frac{1}{3}$$
+
+De forma semelhante para obetermos a probabilidade do evento "trocar resulta em sucesso", que denotaremos por $TS$, basta somarmos as probabilidades dos eventos tais que $p_1 \neq p_2$ pois nesse caso a porta "restante" sempre será a premiada.
+
+\begin{matrix}
+p_i & p_j & p_k & P
+\\
+1 & 2 & 3 & 1/9
+\\
+1 & 3 & 2 & 1/9
+\\
+2 & 1 & 3 & 1/9
+\\
+2 & 3 & 1 & 1/9
+\\  
+3 & 1 & 2 & 1/9
+\\
+3 & 2 & 1 & 1/9
+\end{matrix}
+
+$$P(TS) = \frac{1}{9} \times 6 = \frac{2}{3}$$
+
+
+
+Podemos condensar esse resultado na seguinte tabela:
+
+***
 
 ```{tikz, tikz-ex22, fig.align='center', fig.cap = "", fig.ext = 'png', cache=TRUE, echo=FALSE}
 \begin{tikzpicture}
 
-\node at (-2,0)[]{Porta Escolhida};
+\draw [thin, color=white](-4,0.7) -- (-3.5,0.7);
+\draw [thin, color=white](8.5,0.7) -- (9,0.7);
 
-\node at (1,1)[rectangle,draw=black!50,fill=red!85,thick]{Carro na $1\textsuperscript{\underline{o}}$};
+\draw [thin](-3.5,1.7) -- (8.5,1.7);
+\draw [thin](-3.5,0.7) -- (8.5,0.7);
+\draw [thin](-3.5,-2.5) -- (8.5,-2.5);
 
-\draw [-stealth] (1,0.8) -- (0,0.4);
-\draw [-stealth] (1,0.8) -- (1,0.4);
-\draw [-stealth] (1,0.8) -- (2,0.4);
+\draw [thin](-0.5,1.7) -- (-0.5,-2.5);
+
+\draw [thin](-3.5,1.7) -- (-3.5,-2.5);
+
+\draw [thin](2.5,1.7) -- (2.5,-2.5);
+
+\draw [thin](5.5,1.7) -- (5.5,-2.5);
+
+\draw [thin](8.5,1.7) -- (8.5,-2.5);
+
+\node at (-2,1.2){Porta Premiada};
+\node at (-2,0){Porta Escolhida};
+
+\node at (-2,-1){Não Troca};
+\node at (-2,-2){Troca};
+
+\node at (1,1.2){$1\textsuperscript{\underline{o}}$};
 
 \node at (0,0) [circle, draw=black!50,fill=white,thick] {$1\textsuperscript{\underline{o}}$};
 \node at (1,0) [circle, draw=black!50,fill=white,thick] {$2\textsuperscript{\underline{o}}$};
 \node at (2,0) [circle, draw=black!50,fill=white,thick] {$3\textsuperscript{\underline{o}}$};
 
-\node at (4,1)[rectangle,draw=black!50,fill=green!85,thick]{Carro na $2\textsuperscript{\underline{o}}$};
+\node at (0,-1) [circle, draw=black!50,fill=green!30,thick] {o};
+\node at (1,-1) [circle, draw=black!50,fill=red!30,thick] {x};
+\node at (2,-1) [circle, draw=black!50,fill=red!30,thick] {x};
 
-\draw [-stealth] (4,0.8) -- (3,0.4);
-\draw [-stealth] (4,0.8) -- (4,0.4);
-\draw [-stealth] (4,0.8) -- (5,0.4);
+\node at (0,-2) [circle, draw=black!50,fill=red!30,thick] {x};
+\node at (1,-2) [circle, draw=black!50,fill=green!30,thick] {o};
+\node at (2,-2) [circle, draw=black!50,fill=green!30,thick] {o};
+
+
+\node at (4,1.2){$2\textsuperscript{\underline{o}}$};
 
 \node at (3,0) [circle, draw=black!50,fill=white,thick] {$1\textsuperscript{\underline{o}}$};
 \node at (4,0) [circle, draw=black!50,fill=white,thick] {$2\textsuperscript{\underline{o}}$};
 \node at (5,0) [circle, draw=black!50,fill=white,thick] {$3\textsuperscript{\underline{o}}$};
 
-\node at (7,1)[rectangle,draw=black!50,fill=yellow!85,thick]{Carro na $3\textsuperscript{\underline{o}}$};
+\node at (3,-1) [circle, draw=black!50,fill=red!30,thick] {x};
+\node at (4,-1) [circle, draw=black!50,fill=green!30,thick] {o};
+\node at (5,-1) [circle, draw=black!50,fill=red!30,thick] {x};
 
-\draw [-stealth] (7,0.8) -- (6,0.4);
-\draw [-stealth] (7,0.8) -- (7,0.4);
-\draw [-stealth] (7,0.8) -- (8,0.4);
+\node at (3,-2) [circle, draw=black!50,fill=green!30,thick] {o};
+\node at (4,-2) [circle, draw=black!50,fill=red!30,thick] {x};
+\node at (5,-2) [circle, draw=black!50,fill=green!30,thick] {o};
+
+
+\node at (7,1.2){$3\textsuperscript{\underline{o}}$};
 
 \node at (6,0) [circle, draw=black!50,fill=white,thick] {$1\textsuperscript{\underline{o}}$};
 \node at (7,0) [circle, draw=black!50,fill=white,thick] {$2\textsuperscript{\underline{o}}$};
 \node at (8,0) [circle, draw=black!50,fill=white,thick] {$3\textsuperscript{\underline{o}}$};
 
+\node at (6,-1) [circle, draw=black!50,fill=red!30,thick] {x};
+\node at (7,-1) [circle, draw=black!50,fill=red!30,thick] {x};
+\node at (8,-1) [circle, draw=black!50,fill=green!30,thick] {o};
+
+\node at (6,-2) [circle, draw=black!50,fill=green!30,thick] {o};
+\node at (7,-2) [circle, draw=black!50,fill=green!30,thick] {o};
+\node at (8,-2) [circle, draw=black!50,fill=red!30,thick] {o};
+
+
 \end{tikzpicture}
 ```
 
+***
 
+### Solução *Bayesiana*
+
+Outra forma de solucionar o problema de Monty Hall seria via *Teorema de Bayes*.
+
+Denotando por $H_i$, $i \in \{1,2,3\}$, o evento "porta $i$ ser a premiada" e por $W_j$, $j \in \{1,2,3\}$, o evento "porta $j$ ser aberta pelo apresentador" e por $P(H_i|W_j)$ a probabilidade da porta $i$ ser a premiada sendo que a porta $j$ foi aberta, temos:
+
+$$P(H_i|W_j) = \frac{P(W_j|H_i)P(H_i)}{P(W_j)} = \frac{P(W_j|H_i)P(H_i)}{{\displaystyle\sum_{i \in \{1,2,3\}}} P(W_j|H_i)P(H_i)}$$
+Vale ressaltar que, para todo $\forall i,j \in \{ 1,2,3\}$, vale:
+
+$P(H_i)=\frac{1}{3}$;
+
+$P(W_j|H_i) = 0$, quando $j = i$, pois o apresentadador nunca abre a porta premiada;
+
+$P(W_j|H_i) = \frac{1}{2}$, quando a porta escolhida pelo participante for igual a $i$, esse resultado surge da generalização de que quando a porta escolhida é a premiada o apresentador pode escolher dentre duas portas qual abrir.
+
+$P(W_j|H_i) = 1$, quando a porta escolhida pelo participante for diferente de $i$,esse resultado surge da generalização de que quando a porta escolhida não é a premiada o apresentador não tem opção de escolha em qual porta abrir.
+
+</br>
+
+Partindo disso suponha o seguinte cenário, o participante escolher a porta um e o apresentador abrir a porta três, qual é a probabilidade da porta um ser a premiada ?
+
+$$
+\begin{aligned}
+    P(H_1|W_3) =& \frac{P(W_3|H_1)P(H_1)}{P(W_3)} \\
+    =& \frac{P(W_3|H_1)P(H_1)}{P(W_3|H_1)P(H_1) + P(W_3|H_2)P(H_2) + P(W_3|H_3)P(H_3)} \\
+    =& \frac{\frac{1}{2}\frac{1}{3}}{\frac{1}{2}\frac{1}{3} + 1\frac{1}{3} + 0\frac{1}{3}} = \frac{1}{3}
+\end{aligned}
+$$
+
+
+Assumindo o mesmo cenario, qual é a probabilidade da porta dois ser a premiada ?
+
+$$P(H_2|W_3) = \frac{P(W_3|H_2)P(H_2)}{P(W_3)} = \frac{1\frac{1}{3}}{\frac{1}{2}\frac{1}{3} + 1\frac{1}{3} + 0\frac{1}{3}} = \frac{2}{3}$$
+
+Podemos perceber que o resultado é o mesmo independente da abordagem.
+
+
+## Extras
+
+"Aqui está uma boa maneira de visualizar o que aconteceu. Suponha que haja um milhão de portas e você escolha a porta nº 1. Em seguida, o apresentador, que sabe o que está por trás das portas e sempre evitará aquele com o prêmio, abre todas, exceto a porta nº 777.777. Você mudaria para aquela porta bem rápido, não é?" - Marilyn vos Savant
+
+***
+
+```{r, echo=FALSE, fig.align='center', fig.cap = 'Disponível em: https://xkcd.com/1282', label = 'https://xkcd.com/1282', out.width="55%"}
+knitr::include_graphics("C:/Users/esley/Desktop/text/funny.png")
+
+```
+
+***
+
+## Referencias
+
+https://www.statisticshowto.com/probability-and-statistics/monty-hall-problem/
+
+https://www.baeldung.com/cs/monty-hall-problem#id222922156
+
+https://chance.amstat.org/2022/11/monty-hall/#
 
 
 
