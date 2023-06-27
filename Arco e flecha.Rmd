@@ -1,0 +1,116 @@
+---
+title: ""
+author: ""
+date: ""
+output: bookdown::html_document2
+pdf_document:
+  extra_dependencies: [amsmath,tikz]
+---
+
+# Sou bom no arco e flecha?
+
+## Objetivo
+
+Introduzir os visitantes da mostra a ideia de estimadores e suas propriedades atraves de uma brincadeira de arco e flecha.
+
+## Motivacao
+
+
+## Construcao
+
+
+## Execucao
+
+
+## Teoria
+
+### Estimadores 
+
+Suponha que o centro do alvo, *bullseye*, seja a estatistica $\theta$ que desejamos estimar de uma populacao $S$.
+
+E tambem suponha que cada flecha lancada seja uma tentativa de estimar $\theta$, com um estimator $\hat{\theta}(s_i)$, onde $s$ é uma amostra de tamanho $S$.
+
+Nesse caso as propriedades do estimador $\hat{\theta}$ serao influenciadas pela abilidade do participante com o arco e flecha. Propriedades essas como variância e viés.
+
+
+#### Algumas propriedades de estimadores 
+
+Sendo
+\begin{equation}
+E[\hat{\theta}] = \sum_{s \in S} {\hat{\theta}(s)} p(s) (\#eq:Espest)
+\end{equation}
+
+a variância de um estimador e dada por
+
+\begin{equation}
+Var[\hat{\theta}] = E[(\hat{\theta}-E[\hat{\theta}])^2] (\#eq:Varest)
+\end{equation}
+
+e o viés de um estimador e dado por
+
+\begin{equation}
+B[\hat{\theta}] = E[\hat{\theta}] - \theta (\#eq:Biaest)
+\end{equation}
+
+Trazendo esses conceitos para o experimento podemos definir o viés como sendo "distancia entre a posicao media das flechas com relacao ao alvo" e a variância como sendo "soma das distancias quadradas medias entre as posicoes das flechas".
+
+#### Exemplo pratico
+
+Suponha tres participantes, nossos "estimadores", representados pelas cores <span style="color: orange;">laranja</span>, <span style="color: green;">verde</span> e <span style="color: blue;">azul</span>, onde cada um teve a chance de disparar tres flechas com o intuito de acertar o alvo, ou tres amostras $s$ para tentar estimar $\theta$.
+
+
+***
+
+```{tikz Alvo, label='Alvo', fig.align='center', fig.cap = "Posição final das flechas disparadas.", fig.ext = 'png', cache=TRUE, echo=FALSE, out.width="50%"}
+\begin{tikzpicture}
+
+\draw[thick] (0,0) circle (3.3);
+
+\draw[thick, color = black!10!white] (0,0) circle (0.9);
+\draw[thick, color = black!10!white] (0,0) circle (1.5);
+\draw[thick, color = black!10!white] (0,0) circle (2.1);
+\draw[thick, color = black!10!white] (0,0) circle (2.7);
+
+
+
+\draw[color=red!25!white] (0,0) node[] {$\theta$};
+
+\draw[color=red!20!white] (0,0) circle (0.3);
+
+
+\draw[color=blue!75!black] (1.5,1.5) node[] {$\hat{\theta}_1$};
+\draw[color=blue!75!black] (2,1) node[] {$\hat{\theta}_2$};
+\draw[color=blue!75!black] (1.2,0.8) node[] {$\hat{\theta}_3$};
+
+\draw[color=green!75!black] (0.3,0.7) node[] {$\hat{\theta}_1$};
+\draw[color=green!75!black] (-0.5,-0.6) node[] {$\hat{\theta}_2$};
+\draw[color=green!75!black] (0.7,-0.8) node[] {$\hat{\theta}_3$};
+
+\draw[color=orange!85!black] (-0.2,0.3) node[] {$\hat{\theta}_1$};
+\draw[color=orange!85!black] (-1.8,0.6) node[] {$\hat{\theta}_2$};
+\draw[color=orange!85!black] (-0.7,-2.2) node[] {$\hat{\theta}_3$};
+
+\end{tikzpicture}
+```
+
+***
+
+Ao observar a figura \@ref(fig:Alvo) podemos perceber que o participante <span style="color: blue;">azul</span> e o que apresenta o estimador com menor variância porem com o maior viés, ja o <span style="color: orange;">laranja</span> foi o que chegou mais proximo do centro porem apresenta grande variância e algum viés por ultimo o participante <span style="color: green;">verde</span> foi o que apresentou menor viés com uma variância pequena.
+
+Logo nesse caso especifico podemos concluir que o participante <span style="color: green;">verde</span> possui o melhor estimador de $\theta$.
+
+
+
+## Referencias
+
+https://amostragemcomr.github.io/livro/visger.html#estat%C3%ADsticas-estimadores-e-estimativas
+
+
+
+
+
+
+
+
+
+
