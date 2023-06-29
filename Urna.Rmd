@@ -1,0 +1,137 @@
+---
+title: ""
+author: ""
+date: ""
+output: bookdown::html_document2
+pdf_document:
+  extra_dependencies: [amsmath,tikz]
+---
+
+
+# Quantos sao os papeis na urna ?
+
+## Objetivo
+
+Introduzir os visitantes da mostra as ideias de estimacao de valores e apontar a utilidade da mesma no nosso dia a dia.
+
+## Motivacao
+
+[exemplos praticos da teoria aplicada no dia a dia]
+
+
+## Construcao
+
+
+## Execucao
+
+
+## Teoria
+
+***
+
+### Forma intuitiva de estimar o total
+
+***
+
+Uma forma intuitiva de encontrar o valor total de rolinhos seria da seguinte maneira:
+
+Considere o volume ocupado pelos $N$ rolinhos de papel na urna como sendo $V$.
+
+Agora suponha que sejam retirados $n$ rolinhos de papel de uma certo volume $v$, onde $v = \frac{V}{Q}$, assumindo que todas as porcoes contenham a mesma quantidade de rolinhos temos:
+
+\begin{equation}
+
+nQ = N
+
+(\#eq:Igualdade1)
+
+\end{equation}
+
+Com isso teoricamente precisamos somente de contar os $n$ rolinhos contidos em uma porcao $v$ para encontrarmos $N$
+porem na pratica nao e bem assim, existe uma grande chance das porcoes nao conterem a mesma quantidade de rolinhos
+
+***
+
+### Estimacao do total via *amostragem aleatoria simples*
+
+***
+
+Novamente considere o volume ocupado pelos $N$ rolinhos de papel na urna como sendo $V$ e tambem que hajam $Q$ porcoes de volume $v$ onde $v = \frac{V}{Q}$.
+
+Porem dessa vez vamos assumir que exista uma variacao entre o valor de $n$ nas diferentes porcoes.
+
+Supondo que foram tomadas, aleatoriamente e sem reposicao, uma amostra de $q$ porcoes, temos:
+
+\begin{equation}
+
+\bar{N} = Q\bar{n} = \frac{Q}{q} \sum_{i = 1}^q \mathit{n_i}
+
+(\#eq:Igualdade2)
+
+\end{equation}
+
+Onde $\bar{N}$ denota o estimador nao viesado do total $N$ com $n_i$ sendo a quantidade de rolinhos na i-esima porcao e $\bar{n}$ o valor medio de $n_i$ na amostra tomada.
+
+A variancia de $\bar{N}$ dada por
+
+\begin{equation}
+
+Var[\bar{N}] = Var[Q\bar{n}] = Q^2Var[\bar{n}] = Q^2 (1 - \frac{q}{Q}) \frac{s^2}{q}
+
+(\#eq:Igualdade3)
+
+\end{equation}
+
+Onde 
+$s^2 = \frac{1}{q - 1} \sum_{i=1}^q (n_i-\bar{n})^2$
+
+No caso com reposicao, ou seja cada vez que retiramos uma porcao a colocamos de volta antes de retiramos a proxima, temos que a variancia de $\bar{N}$ e dada por
+
+\begin{equation}
+
+Var[\bar{N}] = Q^2 \frac{s^2}{q}
+
+(\#eq:Igualdade4)
+
+\end{equation}
+
+Em ambos os planos AASs e AASc o estimador do total $\bar{N}$ apresentam menor variancia quando $q$ assuma valores grandes.
+
+***
+
+### Estimacao via sabedoria das multidoes
+
+***
+
+A ideia de sabedoria das multidoes, *wisdom of crowds* em ingles, que diz que, satisfeitos certos requerimentos, um coletivo de opinioes e melhor ou mais acurado que a maioria de suas componentes, logo aplicando essa ideia ao experimento temos que se tomarmos o valor medio dos palpites esse resultado estara proximo, comparado a maioria das opinioes, ao real quantidade de papeis na urna.
+
+Um caso notorio de sabedoria das multidoes ocorreu no ano de 1906 em uma feira rural em *Plymouth* onde 800 pessoas participaram de um concurso para estimar o peso de um boi abatido e preparado. O estatistico Francis Galton observou que o palpite medio, mediana das observacoes, 1.207 libras, era preciso dentro de 1\% do peso real de 1.198 libras. Isso contribuiu para a percepcao da ciencia cognitiva de que os julgamentos individuais de uma multidao podem ser modelados como uma distribuicao de probabilidade de respostas com a mediana centralizada proxima ao valor real da quantidade a ser estimada.
+
+Em seu livro *The Wisdom of Crowds* James Surowiecki define certos requerimentos para uma multidao ser considerada sabia, sao eles diversidade, independencia, decentralizacao, agregacao e confianca.
+
+...
+
+
+
+
+
+
+
+## Referencias
+
+***
+
+https://amostragemcomr.github.io/livro/visger.html#estat%C3%ADsticas-estimadores-e-estimativas
+
+
+***
+
+
+
+
+
+
+
+
+
+
