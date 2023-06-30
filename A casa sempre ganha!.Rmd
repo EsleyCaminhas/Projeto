@@ -1,0 +1,70 @@
+---
+title: ""
+author: ""
+date: ""
+output: bookdown::html_document2
+pdf_document:
+  extra_dependencies: [amsmath,tikz,inputenc]
+---
+
+# A casa sempre ganha!
+
+## Objetivo
+
+
+## Motivacao
+
+      
+## Construcao
+
+
+## Execucao
+
+
+## Teoria
+
+***
+
+### Calculo de *Payoff* em jogos de azar
+
+***
+
+Suponha que um novo jogo seja proposto em um casino onde ao custo de uma certa quantia $b$ o jogador tem a chance de receber $a+b$ caso ganhe, nesse jogo a probabilidade do jogador ganhar é de $P$ e da casa ganhar, ou seja do jogador perder, é de $1-P$.
+
+Seja $Y$ variavel aleatoria que representa o quanto a casa lucra
+por jogo, como o jogo so possui dois possiveis resultados, "casa ganhar" onde ela lucra $b$ e "casa perder" onde ela "lucra" $-a$, temos:
+
+\begin{equation}
+E[Y] = -aP + b(1-P)  (\#eq:Esp1)
+\end{equation}
+
+Como a casa deseja ter lucro positivo a restricao e que $E[X] > 0$.
+
+***
+
+#### *House Edge*
+
+***
+
+O *House Edge*, que sera denotado por $He$, e uma medida que representa o quanto a casa espera lucrar por cada unidade de dinheiro paga pelo jogador para participar do jogo, utilizando o exemplo anterior temos:
+
+\begin{equation}
+He = \frac{E[Y]}{b}  (\#eq:Esp2)
+\end{equation}
+
+***
+
+#### Exemplo pratico
+
+***
+
+Assuma que um novo jogo funciona da seguinte forma:
+
+Apos o jogador pagar 2 reais um dado é lançado e caso saia 7 o jogador ganha uma quantia $a+2$ e caso contrario perde, a duvida e a seguinte qual sera o valor justo para ser pago ao jogador caso o mesmo ganhe assumindo que o $He$ seja menor que 20\% ?
+
+$$E[X] = -a\frac{1}{6} + 2\frac{5}{6}=\frac{10-a}{6}$$ 
+$$He = \frac{\frac{10-a}{6}}{2}=\frac{10-a}{12} \leq 0.20 \implies a=8$$
+Logo o jogador recebera 10 reais caso ganhe, e a casa ira lucrar 16\% de cara real gastou nesse jogo.
+
+
+
