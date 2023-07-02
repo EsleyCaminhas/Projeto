@@ -4,17 +4,18 @@ author: ""
 date: ""
 output: bookdown::html_document2
 pdf_document:
-  extra_dependencies: [amsmath,tikz,inputenc]
+  extra_dependencies: [amsmath,tikz]
 ---
 
 # A casa sempre ganha!
 
 ## Objetivo
 
+Introduzir os visitantes da mostra a ideia de *valor esperado* e como o mesmo e utilizado por casinos para garantir lucro a longo prazo.
 
 ## Motivacao
 
-      
+
 ## Construcao
 
 
@@ -24,47 +25,102 @@ pdf_document:
 ## Teoria
 
 ***
-
-### Calculo de *Payoff* em jogos de azar
-
+### Lei forte dos grandes numeros 
 ***
 
-Suponha que um novo jogo seja proposto em um casino onde ao custo de uma certa quantia $b$ o jogador tem a chance de receber $a+b$ caso ganhe, nesse jogo a probabilidade do jogador ganhar é de $P$ e da casa ganhar, ou seja do jogador perder, é de $1-P$.
-
-Seja $Y$ variavel aleatoria que representa o quanto a casa lucra
-por jogo, como o jogo so possui dois possiveis resultados, "casa ganhar" onde ela lucra $b$ e "casa perder" onde ela "lucra" $-a$, temos:
+Sendo $X_1$, $X_2$, ..., $X_n$, variaveis aleatorias independentes e identicamente distribuidas com $E[X_i]=\mu$ segue que
 
 \begin{equation}
-E[Y] = -aP + b(1-P)  (\#eq:Esp1)
+P\bigg(\lim_{n \to \infty}\frac{X_1+X_2+ ...+X_n}{n} = \mu\bigg) = 1  (\#eq:StrongLaw)
 \end{equation}
 
-Como a casa deseja ter lucro positivo a restricao e que $E[X] > 0$.
+Ou seja $(X_1+X_2+ ...+X_n)/n \to \mu$ quando $n \to \infty$.
+
 
 ***
-
-#### *House Edge*
-
+### Valor esperado em jogos de azar
 ***
 
-O *House Edge*, que sera denotado por $He$, e uma medida que representa o quanto a casa espera lucrar por cada unidade de dinheiro paga pelo jogador para participar do jogo, utilizando o exemplo anterior temos:
+Suponha um jogo que caso o jogador ganhe ele receba $ab$ para um certo valor $b$ apostado, ou seja o *payout* do jogo e de $a$ para $1$, a probabilidade do jogador ganhar é de $P$ e da casa ganhar é de $1-P$.
+
+Seja $Y$ variavel aleatoria que representa "lucro da casa ao final do jogo", como o jogo somente possui dois possiveis resultados, "casa ganhar" onde ela lucra $b$ e "casa perder" onde ela "lucra" $-ab$ temos:
 
 \begin{equation}
-He = \frac{E[Y]}{b}  (\#eq:Esp2)
+E[Y] = -abP + b(1-P)=b(-P(a+1)+1) (\#eq:Esp1)
 \end{equation}
 
+Logo se baseado na Lei forte dos grandes numeros \@ref(eq:StrongLaw) temos que mesmo se a casa tiver perdas a curto prazo no longo prazo a casa saira com lucro positivo assumindo que $E[Y] > 0$.
+
+
+
+***
+### *House Edge*
 ***
 
-#### Exemplo pratico
+O *House Edge*, que sera denotado por $He$, é uma medida que representa a porcentagem que a casa espera lucrar do total apostado pelo jogador, utilizando o exemplo anterior temos:
+
+\begin{equation}
+He= \frac{E[Y]}{b}=\frac{b(-P(a+1)+1)}{b}=-P(a+1)+1 (\#eq:Esp2)
+\end{equation}
+
+Quanto mais proximo de $0$ esta o $He$ de um jogo maior e a chance de um jogador conseguir sair com um saldo positivo do mesmo.
+Um intervalo comum para o $He$ e entre *2\%* e *20\%*.
+
+***
+### Exemplo pratico 
+***
+
+No jogo roleta a aposta em um numero especifico paga $35$ para $1$ caso sucesso, onde a probabilidade de sucesso e de $\frac{1}{38}$, chamando de $X$ a v.a. que representa o lucro esperado da casa caso $b$ seja o valor apostado, temos:
+
+
+$$E[X] = b(-36\frac{1}{38} + 1) \approx b(0.0526)$$
+$$He \approx 0.0526 =5.26\% $$
+Logo a casa espera lucrar *5.26\%* de todo o valor que for apostado em numeros especificos na roleta.
+
+#### Simulacao em *R*
+
+Assuma que sejam feitas diariamente $1000$ apostas de $1$ u.d. em valores especificos na roleta de um certo casino.
+
+```{r, comment=NA, fig.align='center', eval=F}
+
+# Funcao que representa o lucro diario da casa
+# considerando apostas em valores especificos na roleta
+
+RouletteDay = function(){
+  
+  LucroCasa = 0
+  
+  for (i in 1:1000){
+    Resultado = sample(c(1,0), 1, prob = c(1/38,37/38))
+    
+    if (Resultado == 1){
+      LucroCasa = LucroCasa - 35
+    } else {
+      LucroCasa = LucroCasa + 1
+           }
+    }
+    return(LucroCasa)
+}
+
+LucroAno = replicate(365, RouletteDay())
+
+hist(LucroAno, xlab = "Lucro diario", 
+               ylab = "Frequencia", main = "")
+
+abline(v=52.6, col="red")
+legend("topleft", c("Valor esperado lucro diario"), col=c("red"), lwd=1)
+
+LucroTeorico = 1000*365*0.0526;LucroTeorico
+LucroEfetivo = sum(LucroAno);LucroEfetivo
+```
+
 
 ***
 
-Assuma que um novo jogo funciona da seguinte forma:
+## Referencias
 
-Apos o jogador pagar 2 reais um dado é lançado e caso saia 7 o jogador ganha uma quantia $a+2$ e caso contrario perde, a duvida e a seguinte qual sera o valor justo para ser pago ao jogador caso o mesmo ganhe assumindo que o $He$ seja menor que 20\% ?
+***
 
-$$E[X] = -a\frac{1}{6} + 2\frac{5}{6}=\frac{10-a}{6}$$ 
-$$He = \frac{\frac{10-a}{6}}{2}=\frac{10-a}{12} \leq 0.20 \implies a=8$$
-Logo o jogador recebera 10 reais caso ganhe, e a casa ira lucrar 16\% de cara real gastou nesse jogo.
-
-
+Ross, Sheldon. 
+Probabilidade: um curso moderno com aplicacoes, 8. ed. Porto Alegre: Bookman, 2010. 
 

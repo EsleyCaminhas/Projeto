@@ -285,23 +285,17 @@ overflow-y: auto;
 border: 1px solid #ddd;
 border-radius: 4px;
 }
-.tabset-dropdown > .nav-tabs > li.active:before {
-content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+content: "\e259";
 font-family: 'Glyphicons Halflings';
 display: inline-block;
 padding: 10px;
 border-right: 1px solid #ddd;
 }
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-content: "";
-border: none;
-}
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-content: "";
+content: "\e258";
 font-family: 'Glyphicons Halflings';
-display: inline-block;
-padding: 10px;
-border-right: 1px solid #ddd;
+border: none;
 }
 .tabset-dropdown > .nav-tabs > li.active {
 display: block;
@@ -350,6 +344,7 @@ display: none;
 <h1><span class="header-section-number">1</span> A casa sempre ganha!</h1>
 <div id="objetivo" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Objetivo</h2>
+<p>Introduzir os visitantes da mostra a ideia de <em>valor esperado</em> e como o mesmo e utilizado por casinos para garantir lucro a longo prazo.</p>
 </div>
 <div id="motivacao" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Motivacao</h2>
@@ -363,36 +358,86 @@ display: none;
 <div id="teoria" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Teoria</h2>
 <hr />
-<div id="calculo-de-payoff-em-jogos-de-azar" class="section level3" number="1.5.1">
-<h3><span class="header-section-number">1.5.1</span> Calculo de <em>Payoff</em> em jogos de azar</h3>
+<div id="lei-forte-dos-grandes-numeros" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Lei forte dos grandes numeros</h3>
 <hr />
-<p>Suponha que um novo jogo seja proposto em um casino onde ao custo de uma certa quantia <span class="math inline">\(b\)</span> o jogador tem a chance de receber <span class="math inline">\(a+b\)</span> caso ganhe, nesse jogo a probabilidade do jogador ganhar é de <span class="math inline">\(P\)</span> e da casa ganhar, ou seja do jogador perder, é de <span class="math inline">\(1-P\)</span>.</p>
-<p>Seja <span class="math inline">\(Y\)</span> variavel aleatoria que representa o quanto a casa lucra
-por jogo, como o jogo so possui dois possiveis resultados, “casa ganhar” onde ela lucra <span class="math inline">\(b\)</span> e “casa perder” onde ela “lucra” <span class="math inline">\(-a\)</span>, temos:</p>
+<p>Sendo <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, …, <span class="math inline">\(X_n\)</span>, variaveis aleatorias independentes e identicamente distribuidas com <span class="math inline">\(E[X_i]=\mu\)</span> segue que</p>
+<p><span class="math display" id="eq:StrongLaw">\[\begin{equation}
+P\bigg(\lim_{n \to \infty}\frac{X_1+X_2+ ...+X_n}{n} = \mu\bigg) = 1  \tag{1.1}
+\end{equation}\]</span></p>
+<p>Ou seja <span class="math inline">\((X_1+X_2+ ...+X_n)/n \to \mu\)</span> quando <span class="math inline">\(n \to \infty\)</span>.</p>
+<hr />
+</div>
+<div id="valor-esperado-em-jogos-de-azar" class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Valor esperado em jogos de azar</h3>
+<hr />
+<p>Suponha um jogo que caso o jogador ganhe ele receba <span class="math inline">\(ab\)</span> para um certo valor <span class="math inline">\(b\)</span> apostado, ou seja o <em>payout</em> do jogo e de <span class="math inline">\(a\)</span> para <span class="math inline">\(1\)</span>, a probabilidade do jogador ganhar é de <span class="math inline">\(P\)</span> e da casa ganhar é de <span class="math inline">\(1-P\)</span>.</p>
+<p>Seja <span class="math inline">\(Y\)</span> variavel aleatoria que representa “lucro da casa ao final do jogo”, como o jogo somente possui dois possiveis resultados, “casa ganhar” onde ela lucra <span class="math inline">\(b\)</span> e “casa perder” onde ela “lucra” <span class="math inline">\(-ab\)</span> temos:</p>
 <p><span class="math display" id="eq:Esp1">\[\begin{equation}
-E[Y] = -aP + b(1-P)  \tag{1.1}
+E[Y] = -abP + b(1-P)=b(-P(a+1)+1) \tag{1.2}
 \end{equation}\]</span></p>
-<p>Como a casa deseja ter lucro positivo a restricao e que <span class="math inline">\(E[X] &gt; 0\)</span>.</p>
+<p>Logo se baseado na Lei forte dos grandes numeros <a href="#eq:StrongLaw">(1.1)</a> temos que mesmo se a casa tiver perdas a curto prazo no longo prazo a casa saira com lucro positivo assumindo que <span class="math inline">\(E[Y] &gt; 0\)</span>.</p>
 <hr />
-<div id="house-edge" class="section level4" number="1.5.1.1">
-<h4><span class="header-section-number">1.5.1.1</span> <em>House Edge</em></h4>
+</div>
+<div id="house-edge" class="section level3" number="1.5.3">
+<h3><span class="header-section-number">1.5.3</span> <em>House Edge</em></h3>
 <hr />
-<p>O <em>House Edge</em>, que sera denotado por <span class="math inline">\(He\)</span>, e uma medida que representa o quanto a casa espera lucrar por cada unidade de dinheiro paga pelo jogador para participar do jogo, utilizando o exemplo anterior temos:</p>
+<p>O <em>House Edge</em>, que sera denotado por <span class="math inline">\(He\)</span>, é uma medida que representa a porcentagem que a casa espera lucrar do total apostado pelo jogador, utilizando o exemplo anterior temos:</p>
 <p><span class="math display" id="eq:Esp2">\[\begin{equation}
-He = \frac{E[Y]}{b}  \tag{1.2}
+He= \frac{E[Y]}{b}=\frac{b(-P(a+1)+1)}{b}=-P(a+1)+1 \tag{1.3}
 \end{equation}\]</span></p>
+<p>Quanto mais proximo de <span class="math inline">\(0\)</span> esta o <span class="math inline">\(He\)</span> de um jogo maior e a chance de um jogador conseguir sair com um saldo positivo do mesmo.
+Um intervalo comum para o <span class="math inline">\(He\)</span> e entre <em>2%</em> e <em>20%</em>.</p>
 <hr />
 </div>
-<div id="exemplo-pratico" class="section level4" number="1.5.1.2">
-<h4><span class="header-section-number">1.5.1.2</span> Exemplo pratico</h4>
+<div id="exemplo-pratico" class="section level3" number="1.5.4">
+<h3><span class="header-section-number">1.5.4</span> Exemplo pratico</h3>
 <hr />
-<p>Assuma que um novo jogo funciona da seguinte forma:</p>
-<p>Apos o jogador pagar 2 reais um dado é lançado e caso saia 7 o jogador ganha uma quantia <span class="math inline">\(a+2\)</span> e caso contrario perde, a duvida e a seguinte qual sera o valor justo para ser pago ao jogador caso o mesmo ganhe assumindo que o <span class="math inline">\(He\)</span> seja menor que 20% ?</p>
-<p><span class="math display">\[E[X] = -a\frac{1}{6} + 2\frac{5}{6}=\frac{10-a}{6}\]</span>
-<span class="math display">\[He = \frac{\frac{10-a}{6}}{2}=\frac{10-a}{12} \leq 0.20 \implies a=8\]</span>
-Logo o jogador recebera 10 reais caso ganhe, e a casa ira lucrar 16% de cara real gastou nesse jogo.</p>
+<p>No jogo roleta a aposta em um numero especifico paga <span class="math inline">\(35\)</span> para <span class="math inline">\(1\)</span> caso sucesso, onde a probabilidade de sucesso e de <span class="math inline">\(\frac{1}{38}\)</span>, chamando de <span class="math inline">\(X\)</span> a v.a. que representa o lucro esperado da casa caso <span class="math inline">\(b\)</span> seja o valor apostado, temos:</p>
+<p><span class="math display">\[E[X] = b(-36\frac{1}{38} + 1) \approx b(0.0526)\]</span>
+<span class="math display">\[He \approx 0.0526 =5.26\% \]</span>
+Logo a casa espera lucrar <em>5.26%</em> de todo o valor que for apostado em numeros especificos na roleta.</p>
+<div id="simulacao-em-r" class="section level4" number="1.5.4.1">
+<h4><span class="header-section-number">1.5.4.1</span> Simulacao em <em>R</em></h4>
+<p>Assuma que sejam feitas diariamente <span class="math inline">\(1000\)</span> apostas de <span class="math inline">\(1\)</span> u.d. em valores especificos na roleta de um certo casino.</p>
+<pre class="r"><code># Funcao que representa o lucro diario da casa
+# considerando apostas em valores especificos na roleta
+
+RouletteDay = function(){
+  
+  LucroCasa = 0
+  
+  for (i in 1:1000){
+    Resultado = sample(c(1,0), 1, prob = c(1/38,37/38))
+    
+    if (Resultado == 1){
+      LucroCasa = LucroCasa - 35
+    } else {
+      LucroCasa = LucroCasa + 1
+           }
+    }
+    return(LucroCasa)
+}
+
+LucroAno = replicate(365, RouletteDay())
+
+hist(LucroAno, xlab = &quot;Lucro diario&quot;, 
+               ylab = &quot;Frequencia&quot;, main = &quot;&quot;)
+
+abline(v=52.6, col=&quot;red&quot;)
+legend(&quot;topleft&quot;, c(&quot;Valor esperado lucro diario&quot;), col=c(&quot;red&quot;), lwd=1)
+
+LucroTeorico = 1000*365*0.0526;LucroTeorico
+LucroEfetivo = sum(LucroAno);LucroEfetivo</code></pre>
+<hr />
 </div>
 </div>
+</div>
+<div id="referencias" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Referencias</h2>
+<hr />
+<p>Ross, Sheldon.
+Probabilidade: um curso moderno com aplicacoes, 8. ed. Porto Alegre: Bookman, 2010.</p>
 </div>
 </div>
 
