@@ -1,0 +1,244 @@
+---
+title: ""
+author: ""
+date: ""
+output: bookdown::html_document2
+pdf_document:
+  extra_dependencies: [amsmath,tikz]
+---
+<style type="text/css">
+  body{
+  font-family: Sans-serif;
+  font-size: 13pt;
+}
+</style>
+
+# Caminhada Aleatória 
+
+***
+
+## Objetivo
+
+***
+
+Introduzir os visitantes da mostra a idéia de caminhada aleatória e estimular o pensamento probabilistico dos mesmos.
+
+## Motivação
+
+***
+
+Suponha que o movimento de uma particula pode ser descrito da seguinte maneira.
+
+Uma moeda honesta é lançada, caso dê cara a particula avança uma unidade para a direita, caso dê coroa ela avança uma unidade para a esquerda.
+
+
+***
+
+```{tikz, tikz-e1, fig.align='center', fig.cap = "", fig.ext = 'png', cache=TRUE, echo=FALSE, out.width="45%"}
+
+\begin{tikzpicture}
+
+\draw[step=1.0,black!50, thick] (-5,-1) grid (5,5);
+
+\filldraw [red] (0,4) circle [radius=4pt];
+\draw [] (0,4) circle [radius=4pt];
+
+\draw [->, line width=0.5mm, black!30] (-0.2,3.8) -- (-0.8,3.2);
+
+\filldraw [red!35] (-1,3) circle [radius=4pt];
+
+\draw [black!35] (-1,3) circle [radius=4pt];
+
+\draw [->, line width=0.5mm, black!30] (0.2,3.8) -- (0.8,3.2);
+
+\filldraw [red!35] (1,3) circle [radius=4pt];
+
+\draw [black!35] (1,3) circle [radius=4pt];
+
+
+\end{tikzpicture}
+```
+
+***
+
+Com isso surge a pergunta: 
+
+É possivel prever qual será a posição final da partícula após quatro lançamentos de moeda?
+
+***
+
+```{tikz, tikz-e2, fig.align='center', fig.cap = "", fig.ext = 'png', cache=TRUE, echo=FALSE, out.width="45%"}
+
+\begin{tikzpicture}
+
+\draw[step=1.0,black!50,thick] (-5,-1) grid (5,5);
+
+\filldraw [red] (0,4) circle [radius=4pt];
+\draw [] (0,4) circle [radius=4pt];
+
+\filldraw [red!35] (1,3) circle [radius=4pt];
+\filldraw [red!35] (-1,3) circle [radius=4pt];
+
+\draw [black!35] (1,3) circle [radius=4pt];
+\draw [black!35] (-1,3) circle [radius=4pt];
+
+\filldraw [red!35] (2,2) circle [radius=4pt];
+\filldraw [red!35] (0,2) circle [radius=4pt];
+\filldraw [red!35] (-2,2) circle [radius=4pt];
+
+\draw [black!35] (2,2) circle [radius=4pt];
+\draw [black!35] (0,2) circle [radius=4pt];
+\draw [black!35] (-2,2) circle [radius=4pt];
+
+\filldraw [red!35] (3,1) circle [radius=4pt];
+\filldraw [red!35] (1,1) circle [radius=4pt];
+\filldraw [red!35] (-1,1) circle [radius=4pt];
+\filldraw [red!35] (-3,1) circle [radius=4pt];
+
+\draw [black!35] (3,1) circle [radius=4pt];
+\draw [black!35] (1,1) circle [radius=4pt];
+\draw [black!35] (-1,1) circle [radius=4pt];
+\draw [black!35] (-3,1) circle [radius=4pt];
+
+\filldraw [red!35] (4,0) circle [radius=4pt];
+\filldraw [red!35] (2,0) circle [radius=4pt];
+\filldraw [red!35] (0,0) circle [radius=4pt];
+\filldraw [red!35] (-2,0) circle [radius=4pt];
+\filldraw [red!35] (-4,0) circle [radius=4pt];
+
+\draw [black!35] (4,0) circle [radius=4pt];
+\draw [black!35] (2,0) circle [radius=4pt];
+\draw [black!35] (0,0) circle [radius=4pt];
+\draw [black!35] (-2,0) circle [radius=4pt];
+\draw [black!35] (-4,0) circle [radius=4pt];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\draw [->, line width=0.5mm, black!30] (-0.2,3.8) -- (-0.8,3.2);
+\draw [->, line width=0.5mm, black!30] (0.2,3.8) -- (0.8,3.2);
+
+\draw [->, line width=0.5mm, black!30] (-1.2,2.8) -- (-1.8,2.2);
+\draw [->, line width=0.5mm, black!30] (-0.8,2.8) -- (-0.2,2.2);
+\draw [->, line width=0.5mm, black!30] (1.2,2.8) -- (1.8,2.2);
+\draw [->, line width=0.5mm, black!30] (0.8,2.8) -- (0.2,2.2);
+
+\draw [->, line width=0.5mm, black!30] (-1.8,1.8) -- (-1.2,1.2);
+\draw [->, line width=0.5mm, black!30] (-0.2,1.8) -- (-0.8,1.2);
+\draw [->, line width=0.5mm, black!30] (1.8,1.8) -- (1.2,1.2);
+\draw [->, line width=0.5mm, black!30] (0.2,1.8) -- (0.8,1.2);
+\draw [->, line width=0.5mm, black!30] (-2.2,1.8) -- (-2.8,1.2);
+\draw [->, line width=0.5mm, black!30] (2.2,1.8) -- (2.8,1.2);
+
+\draw [->, line width=0.5mm, black!30] (0.8,0.8) -- (0.2,0.2);
+\draw [->, line width=0.5mm, black!30] (-0.8,0.8) -- (-0.2,0.2);
+\draw [->, line width=0.5mm, black!30] (-3.2,0.8) -- (-3.8,0.2);
+\draw [->, line width=0.5mm, black!30] (3.2,0.8) -- (3.8,0.2);
+\draw [->, line width=0.5mm, black!30] (1.2,0.8) -- (1.8,0.2);
+\draw [->, line width=0.5mm, black!30] (-1.2,0.8) -- (-1.8,0.2);
+\draw [->, line width=0.5mm, black!30] (-2.8,0.8) -- (-2.2,0.2);
+\draw [->, line width=0.5mm, black!30] (2.8,0.8) -- (2.2,0.2);
+
+
+\end{tikzpicture}
+```
+
+
+***
+
+## ConstruÃ§Ã£o
+
+***
+
+Para esse experimento sÃ£o necessesarios:
+
+* Uma malha quadriculada, para ser mais intuitiva a malha usada pode ser composta somente dos caminhos possiveis.
+* Um marcador. 
+* Uma moeda honesta.
+
+
+## ExecuÃ§Ã£o
+
+***
+
+1. Ã perguntado aos visitantes em que casa da Ãºltima linha da malha eles acreditam que o marcado irÃ¡ terminar.
+
+2. Em seguida o marcador Ã© posicionado na origem da malha e a moeda Ã© jogada.
+
+3. Dependendo do resultado o marcado serÃ¡ movido para uma das proximas posiÃ§Ãµes.
+
+4. Assim sucessivamente atÃ© o marcador chegar a Ãºltima linha.
+
+5. Ao final Ã© explicada a ideia por traz do experimento e o porque da moeda acabar mais nas casas do centro do que nas das bordas.
+
+
+
+## Teoria
+
+***
+
+Prever a posição final de forma consistente é impossivel pois a particula se move de maneira incerta, nesse momento podemos utilizar a probabilidade como ferramenta para nos ajudar a quantificar essa incerteza.
+
+### Distribuição de probabilidada
+
+***
+
+Podemos representar o evento *"Sair cara em um lançamento de moeda"* como sendo uma variavel aleatoria com distribuição de Bernoulli de parametro $p = \frac{1}{2}$
+
+
+
+
+
+
+
+```{r echo=FALSE, warning=FALSE, fig.align='center', eval=FALSE}
+
+#install.packages("randomcoloR")
+#library(randomcoloR)
+FinalPos = c()
+plot(-20:20
+     ,type="n"
+     , asp = 1
+     , xlab = "Passos"
+     , ylab = "PosiÃ§Ã£o"
+     ,xlim = c(0,210)
+     ,main = "SimulaÃ§Ã£o de 200 caminhadas aleatorias \n cada uma com 200 passos")
+
+for (i in 1:200){
+  
+  Direcao = c(1, -1)
+  Posisao = c(0)
+  Rota = c(0)
+  
+  for (i in 1:200){
+    
+    Passo = sample(Direcao, 1)
+    
+    Posisao = Posisao + Passo
+    
+    Rota = c(Rota, Posisao)
+    
+  }
+  par(new=T)
+  
+  lines(Rota
+        , type="l"
+        , asp = 1
+        , xlab = ""
+        , ylab = ""
+#        , col=distinctColorPalette(sample(1:40,1))
+        ,lwd= 2)
+    FinalPos = c(FinalPos, Posisao)
+}
+
+```
+
+```{r echo=FALSE, warning=FALSE, fig.align='center', eval=FALSE}
+hist(FinalPos
+     , main = "Ãltima posiÃ§Ã£o nas 200 caminhadas simuladas"
+     , xlab = "PosiÃ§Ã£o"
+     , ylab = "FrequÃªncia")
+```
+
+
+  
+  
