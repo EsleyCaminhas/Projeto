@@ -32,7 +32,7 @@ knitr::include_graphics("C:/Users/esley/Desktop/text/doors.jpg")
 
 ***
 
-O problema foi primeiramente proposto e solucionado por Steve Selvin em 1975, contudo ganhou maior repercursao em 1990 apos a colunista Marilyn vos Savant responder a um leitor que a questionou sobre o problema, essa resposta criou grande controversia na epoca, desde então o problema de monty hall tem sido um quebra-cabeça comum para introduzir as pessoas ao comportamento não intuitivo da probabilidade.
+O problema foi primeiramente proposto e solucionado por Steve Selvin em 1975, contudo ganhou maior notoriedade em 1990 após Marilyn vos Savant  publica-lo em sua coluna, publicacao que gerou grande controversia na epoca, desde então o problema de monty hall tem sido um quebra-cabeça comum para introduzir as pessoas ao comportamento não intuitivo da probabilidade.
 
 ## Objetivo
 
@@ -53,11 +53,17 @@ A dúvida é a seguinte, assumindo que o principal objetivo é acertar em qual p
 
 ## Construção
 
-[Texto explicando a construção do experimento]
 
 ## Execução
 
-[Texto explicando a execução do experimento]
+Uma sugestão seria seguir os seguintes passos:
+
+1. Enunciar a ideia básica do jogo
+2. Perguntar em qual porta está o premio 
+3. Abrir uma porta que não seja a premiada 
+4. Perguntar se é desejada a troca de porta   
+5. Abrir a porta premiada 
+6. Explicar a teoria de forma que julgar conveniente
 
 ## Teoria
 
@@ -313,13 +319,12 @@ knitr::include_graphics("C:/Users/esley/Desktop/text/funny.png")
 
 ***
 
-## Referencias
+## Referencias e leitura adicional
+***
 
-https://www.statisticshowto.com/probability-and-statistics/monty-hall-problem/
-
-https://www.baeldung.com/cs/monty-hall-problem#id222922156
-
-https://chance.amstat.org/2022/11/monty-hall/#
+[www.statisticshowto.com](https://www.statisticshowto.com/probability-and-statistics/monty-hall-problem/)
+, [www.baeldung.com](https://www.baeldung.com/cs/monty-hall-problem#id222922156)
+e [chance.amstat.org](https://chance.amstat.org/2022/11/monty-hall/#).
 
 
 
